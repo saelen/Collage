@@ -169,3 +169,146 @@ Started GET "/posts/2" for 204.76.113.52 at 2010-11-16 11:47:36 -0600
   [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 2) LIMIT 1[0m
 Rendered posts/show.html.erb within layouts/application (8.0ms)
 Completed 200 OK in 64ms (Views: 12.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/posts" for 204.76.113.52 at 2010-11-16 11:56:18 -0600
+  Processing by PostsController#index as HTML
+  [1m[36mSQL (0.7ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPost Load (0.5ms)[0m  SELECT "posts".* FROM "posts"
+Rendered posts/index.html.erb within layouts/application (42.8ms)
+Completed 200 OK in 113ms (Views: 46.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/posts/1" for 204.76.113.52 at 2010-11-16 11:56:20 -0600
+  Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "comments" WHERE ("comments".post_id = 1)) AS subquery
+Rendered comments/_comment.html.erb (0.0ms)
+Rendered comments/_form.html.erb (41.2ms)
+Rendered posts/show.html.erb within layouts/application (93.0ms)
+Completed 200 OK in 130ms (Views: 97.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/posts/1/comments" for 204.76.113.52 at 2010-11-16 11:56:27 -0600
+
+SyntaxError (/home/saelen/collage/app/controllers/comments_controller.rb:12: syntax error, unexpected $end, expecting keyword_end):
+  
+
+Rendered /usr/local/rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (4.4ms)
+Rendered /usr/local/rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.9ms)
+Rendered /usr/local/rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (30.0ms)
+
+
+Started POST "/posts/1/comments" for 204.76.113.52 at 2010-11-16 11:57:13 -0600
+  Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ErDAHA/SfbMigTLlTESBGRx+s17ZRy68xdgBCwjUxYM=", "comment"=>{"commenter"=>"test", "body"=>"test comment"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mSQL (0.6ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "comments" ("body", "commenter", "created_at", "post_id", "updated_at") VALUES ('test comment', 'test', '2010-11-16 17:57:14.386979', 1, '2010-11-16 17:57:14.386979')[0m
+Redirected to http://saelen.dyndns.org:3000/posts/1
+Completed 302 Found in 226ms
+
+
+Started GET "/posts/1" for 204.76.113.52 at 2010-11-16 11:57:14 -0600
+  Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.9ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "comments" WHERE ("comments".post_id = 1)) AS subquery[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE ("comments".post_id = 1)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1[0m
+Rendered comments/_comment.html.erb (57.8ms)
+Rendered comments/_form.html.erb (9.1ms)
+Rendered posts/show.html.erb within layouts/application (105.4ms)
+Completed 200 OK in 132ms (Views: 109.7ms | ActiveRecord: 2.6ms)
+
+
+Started POST "/posts/1/comments" for 204.76.113.52 at 2010-11-16 11:57:21 -0600
+  Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ErDAHA/SfbMigTLlTESBGRx+s17ZRy68xdgBCwjUxYM=", "comment"=>{"commenter"=>"test comment 3", "body"=>"asdfasdfsadf"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[35mPost Load (1.4ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "comments" ("body", "commenter", "created_at", "post_id", "updated_at") VALUES ('asdfasdfsadf', 'test comment 3', '2010-11-16 17:57:21.653014', 1, '2010-11-16 17:57:21.653014')[0m
+Redirected to http://saelen.dyndns.org:3000/posts/1
+Completed 302 Found in 102ms
+
+
+Started GET "/posts/1" for 204.76.113.52 at 2010-11-16 11:57:21 -0600
+  Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "comments" WHERE ("comments".post_id = 1)) AS subquery[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE ("comments".post_id = 1)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+Rendered comments/_comment.html.erb (11.8ms)
+Rendered comments/_form.html.erb (3.8ms)
+Rendered posts/show.html.erb within layouts/application (39.8ms)
+Completed 200 OK in 67ms (Views: 43.9ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/posts" for 204.76.113.52 at 2010-11-16 11:57:24 -0600
+  Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.8ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+Rendered posts/index.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 60ms (Views: 14.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts/2" for 204.76.113.52 at 2010-11-16 11:57:29 -0600
+  Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 2) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "comments" WHERE ("comments".post_id = 2)) AS subquery[0m
+Rendered comments/_comment.html.erb (0.0ms)
+Rendered comments/_form.html.erb (7.5ms)
+Rendered posts/show.html.erb within layouts/application (38.3ms)
+Completed 200 OK in 64ms (Views: 42.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/1" for 204.76.113.52 at 2010-11-16 11:57:33 -0600
+  Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "comments" WHERE ("comments".post_id = 1)) AS subquery[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE ("comments".post_id = 1)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+Rendered comments/_comment.html.erb (10.7ms)
+Rendered comments/_form.html.erb (3.7ms)
+Rendered posts/show.html.erb within layouts/application (37.4ms)
+Completed 200 OK in 54ms (Views: 39.4ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/posts/1/comments/1" for 204.76.113.52 at 2010-11-16 11:57:38 -0600
+  Processing by CommentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ErDAHA/SfbMigTLlTESBGRx+s17ZRy68xdgBCwjUxYM=", "post_id"=>"1", "id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE ("comments".post_id = 1) AND ("comments"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "comments" WHERE ("comments"."id" = 1)[0m
+Redirected to http://saelen.dyndns.org:3000/posts/1
+Completed 302 Found in 124ms
+
+
+Started GET "/posts/1" for 204.76.113.52 at 2010-11-16 11:57:38 -0600
+  Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "comments" WHERE ("comments".post_id = 1)) AS subquery[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE ("comments".post_id = 1)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 1) LIMIT 1[0m
+Rendered comments/_comment.html.erb (16.5ms)
+Rendered comments/_form.html.erb (6.0ms)
+Rendered posts/show.html.erb within layouts/application (102.4ms)
+Completed 200 OK in 128ms (Views: 106.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/posts" for 204.76.113.52 at 2010-11-16 11:57:42 -0600
+  Processing by PostsController#index as HTML
+  [1m[35mPost Load (1.2ms)[0m  SELECT "posts".* FROM "posts"
+Rendered posts/index.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 40ms (Views: 21.4ms | ActiveRecord: 1.2ms)
