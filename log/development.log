@@ -121,3 +121,8 @@ Started GET "/posts" for 204.76.113.52 at 2010-11-16 11:24:40 -0600
   [1m[36mPost Load (0.9ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
 Rendered posts/index.html.erb within layouts/application (16.5ms)
 Completed 200 OK in 75ms (Views: 21.7ms | ActiveRecord: 0.9ms)
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "posts" ("content", "created_at", "name", "title", "updated_at") VALUES ('a new post!', '2010-11-16 17:30:30.960844', NULL, NULL, '2010-11-16 17:30:30.960844')
