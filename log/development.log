@@ -126,3 +126,46 @@ Completed 200 OK in 75ms (Views: 21.7ms | ActiveRecord: 0.9ms)
  WHERE type = 'table' AND NOT name = 'sqlite_sequence'
 [0m
   [1m[35mSQL (0.3ms)[0m  INSERT INTO "posts" ("content", "created_at", "name", "title", "updated_at") VALUES ('a new post!', '2010-11-16 17:30:30.960844', NULL, NULL, '2010-11-16 17:30:30.960844')
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+Migrating to CreatePosts (20101116172231)
+Migrating to CreateComments (20101116174241)
+  [1m[35mSQL (0.1ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.4ms)[0m  [1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "commenter" varchar(255), "body" text, "post_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101116174241')
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (1.4ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("comments")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("posts")[0m
+
+
+Started GET "/posts" for 204.76.113.52 at 2010-11-16 11:47:30 -0600
+  Processing by PostsController#index as HTML
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts"
+Rendered posts/index.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 96ms (Views: 14.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/2" for 204.76.113.52 at 2010-11-16 11:47:36 -0600
+  Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE ("posts"."id" = 2) LIMIT 1[0m
+Rendered posts/show.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 64ms (Views: 12.3ms | ActiveRecord: 0.7ms)
